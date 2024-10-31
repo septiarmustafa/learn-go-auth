@@ -13,7 +13,7 @@ type User struct {
 	Password string `db:"password"`
 }
 
-type UserInterface interface {
+type UserRepository interface {
 	FindByID(ctx context.Context, id int64) (User, error)
 	FindByUsername(ctx context.Context, username string) (User, error)
 }
