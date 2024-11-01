@@ -89,7 +89,7 @@ func (u *UserService) Register(ctx context.Context, req dto.UserRegisterReq) (dt
 	}
 
 	otpCode := util.GeneratorRandomNumber(4)
-	referenceID := util.GeneratorRandomNumber(16)
+	referenceID := util.GeneratorRandomString(16)
 
 	log.Printf("OTP:: %s ", otpCode)
 	log.Printf("Reference ID:: %s ", referenceID)
