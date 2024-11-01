@@ -56,7 +56,9 @@ func (u *UserRepository) Update(ctx context.Context, user *domain.User) error {
 		Valid: true,
 	}
 
-	executor := u.db.Update("users").Set(goqu.Record{
+	executor := u.db.Update("users").Where(goqu.Ex{
+		"id": user.ID,
+	}).Set(goqu.Record{
 		"full_name":         user.FullName,
 		"email":             user.Email,
 		"phone":             user.Phone,
