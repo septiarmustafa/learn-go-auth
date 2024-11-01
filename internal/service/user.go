@@ -39,6 +39,10 @@ func (u *UserService) Authenticate(ctx context.Context, req dto.AuthReq) (dto.Au
 		return dto.AuthRes{}, domain.ErrAuthFailed
 	}
 
+	if user.EmailVerifiedAtDB.Valid {
+		return dto.AuthRes{}, domain.ErrAuthFailed
+	}
+
 	token := util.GeneratorRandomString(16)
 
 	userJson, _ := json.Marshal(user)
