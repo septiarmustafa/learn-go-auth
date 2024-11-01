@@ -17,7 +17,9 @@ func main() {
 	cacheConnection := component.GetCacheConnection()
 
 	userRespository := repository.NewUser(dbConnection)
-	userService := service.NewUser(userRespository, cacheConnection)
+
+	emailService := service.NewEmail(cnf)
+	userService := service.NewUser(userRespository, cacheConnection, emailService)
 
 	authMid := middleware.Authenticate(userService)
 

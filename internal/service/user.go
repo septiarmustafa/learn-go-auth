@@ -6,7 +6,6 @@ import (
 	"belajar-auth/internal/util"
 	"context"
 	"encoding/json"
-	"log"
 	"time"
 
 	"golang.org/x/crypto/bcrypt"
@@ -15,12 +14,14 @@ import (
 type UserService struct {
 	userRepository  domain.UserRepository
 	cacheRepository domain.CacheRepository
+	emailService    domain.EmailService
 }
 
-func NewUser(userRepository domain.UserRepository, cacheRepository domain.CacheRepository) domain.UserService {
+func NewUser(userRepository domain.UserRepository, cacheRepository domain.CacheRepository, emailService domain.EmailService) domain.UserService {
 	return &UserService{
 		userRepository:  userRepository,
 		cacheRepository: cacheRepository,
+		emailService:    emailService,
 	}
 }
 
@@ -93,8 +94,7 @@ func (u *UserService) Register(ctx context.Context, req dto.UserRegisterReq) (dt
 	otpCode := util.GeneratorRandomNumber(4)
 	referenceID := util.GeneratorRandomString(16)
 
-	log.Printf("OTP:: %s ", otpCode)
-	log.Printf("Reference ID:: %s ", referenceID)
+	_ = u.emailService.Send(req.Email, "OTP Code", "OTP Anda "+otpCode)
 
 	_ = u.cacheRepository.Set("otp:"+referenceID, []byte(otpCode))
 	_ = u.cacheRepository.Set("user-ref:"+referenceID, []byte(user.Username))
