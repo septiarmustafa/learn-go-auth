@@ -51,6 +51,11 @@ func (u *UserRepository) Insert(ctx context.Context, user *domain.User) error {
 
 // Update implements domain.UserRepository.
 func (u *UserRepository) Update(ctx context.Context, user *domain.User) error {
+	user.EmailVerifiedAtDB = sql.NullTime{
+		Time:  user.EmailVerifiedAt,
+		Valid: true,
+	}
+
 	executor := u.db.Update("users").Set(goqu.Record{
 		"full_name":         user.FullName,
 		"email":             user.Email,

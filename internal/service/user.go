@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -94,7 +95,7 @@ func (u *UserService) Register(ctx context.Context, req dto.UserRegisterReq) (dt
 	log.Printf("Reference ID:: %s ", referenceID)
 
 	_ = u.cacheRepository.Set("otp:"+referenceID, []byte(otpCode))
-
+	_ = u.cacheRepository.Set("user-ref:"+referenceID, []byte(user.Username))
 	return dto.UserRegisterRes{
 		ReferenceID: referenceID,
 	}, nil
@@ -111,6 +112,18 @@ func (u *UserService) ValidateOTP(ctx context.Context, req dto.ValidateOtpReq) e
 	if otp != req.OTP {
 		return domain.ErrOtpInvalid
 	}
+
+	val, err = u.cacheRepository.Get("user-ref:" + req.ReferenceID)
+	if err != nil {
+		return domain.ErrOtpInvalid
+	}
+
+	user, err := u.userRepository.FindByUsername(ctx, string(val))
+	if err != nil {
+		return err
+	}
+	user.EmailVerifiedAt = time.Now()
+	_ = u.userRepository.Update(ctx, &user)
 
 	return nil
 }
