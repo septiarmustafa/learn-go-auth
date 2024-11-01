@@ -10,20 +10,20 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "generate token",
+					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"tiar\",\r\n    \"password\": \"123\"\r\n}",
+							"raw": "{\r\n    \"username\": \"tiar6\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:6655/token/generate"
+						"url": "{{localhost}}/token/generate"
 					},
 					"response": [
 						{
@@ -87,7 +87,7 @@
 								}
 							}
 						},
-						"url": "http://localhost:6655/token/validate"
+						"url": "{{localhost}}/token/validate"
 					},
 					"response": [
 						{
@@ -165,20 +165,20 @@
 					]
 				},
 				{
-					"name": "register user",
+					"name": "register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"full_name\": \"tiar 3\",\r\n    \"phone\":\"0899\",\r\n    \"username\": \"tiar3\",\r\n    \"email\":\"tiar@gmail.com\",\r\n    \"password\" :\"123\"\r\n}",
+							"raw": "{\r\n    \"full_name\": \"tiar 6\",\r\n    \"phone\":\"08999\",\r\n    \"username\": \"tiar6\",\r\n    \"email\":\"tiar6@gmail.com\",\r\n    \"password\" :\"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:6655/user/register"
+						"url": "{{localhost}}/user/register"
 					},
 					"response": [
 						{
@@ -226,14 +226,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"reference_id\" : \"8EKcWiSKvPYgYQo6\",\r\n    \"otp\" : \"2650\"\r\n}",
+							"raw": "{\r\n    \"reference_id\" : \"x8IIeW2LD08vpTON\",\r\n    \"otp\" : \"9024\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:6655/user/validate-otp"
+						"url": "{{localhost}}/user/validate-otp"
 					},
 					"response": [
 						{
