@@ -15,9 +15,10 @@ type UserService struct {
 	cacheRepository domain.CacheRepository
 }
 
-func NewUser(userRepository domain.UserRepository) domain.UserService {
+func NewUser(userRepository domain.UserRepository, cacheRepository domain.CacheRepository) domain.UserService {
 	return &UserService{
-		userRepository: userRepository,
+		userRepository:  userRepository,
+		cacheRepository: cacheRepository,
 	}
 }
 
@@ -53,7 +54,7 @@ func (u *UserService) ValidateToken(ctx context.Context, token string) (dto.User
 	}
 
 	var user domain.User
-	_ = json.Unmarshal(data, user)
+	_ = json.Unmarshal(data, &user)
 
 	return dto.UserData{
 		ID:       user.ID,
