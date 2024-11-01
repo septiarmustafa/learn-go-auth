@@ -15,7 +15,7 @@ func GetDatabaseConnection(cnf *config.Config) *sql.DB {
 			"port=%s "+
 			"user=%s "+
 			"password=%s "+
-			"dbname=%s"+
+			"dbname=%s "+
 			"sslmode=disable",
 		cnf.Database.Host,
 		cnf.Database.Port,
@@ -26,11 +26,13 @@ func GetDatabaseConnection(cnf *config.Config) *sql.DB {
 
 	connection, err := sql.Open("postgres", dsn)
 	if err != nil {
-		log.Fatal("Error when open connection %s ", err.Error())
+		log.Fatalf("Error when opening connection: %s", err.Error())
 	}
+
 	err = connection.Ping()
 	if err != nil {
-		log.Fatal("Error when open connection %s ", err.Error())
+		log.Fatalf("Error when pinging database: %s", err.Error())
 	}
+
 	return connection
 }

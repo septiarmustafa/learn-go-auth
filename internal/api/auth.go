@@ -12,11 +12,12 @@ type AuthApi struct {
 	userService domain.UserService
 }
 
-func NewUser(app *fiber.App, userService domain.UserService) {
+func NewAuth(app *fiber.App, userService domain.UserService, authMid fiber.Handler) {
 	h := AuthApi{
 		userService: userService,
 	}
 	app.Post("token/generate", h.GenerateToken)
+	app.Get("token/validate", authMid, h.ValidateToken)
 }
 
 func (a AuthApi) GenerateToken(ctx *fiber.Ctx) error {
@@ -30,4 +31,9 @@ func (a AuthApi) GenerateToken(ctx *fiber.Ctx) error {
 		return ctx.SendStatus(util.GetHttpStatus(err))
 	}
 	return ctx.Status(200).JSON(token)
+}
+
+func (a AuthApi) ValidateToken(ctx *fiber.Ctx) error {
+	user := ctx.Locals("x-user")
+	return ctx.Status(200).JSON(user)
 }
