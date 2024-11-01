@@ -163,6 +163,116 @@
 							"body": "{\n    \"id\": 1,\n    \"full_name\": \"septiar mustafa\",\n    \"phone\": \"0877\",\n    \"username\": \"tiar\"\n}"
 						}
 					]
+				},
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"tiar 3\",\r\n    \"phone\":\"0899\",\r\n    \"username\": \"tiar3\",\r\n    \"email\":\"tiar@gmail.com\",\r\n    \"password\" :\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:6655/user/register"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"full_name\": \"tiar 2\",\r\n    \"phone\":\"0838\",\r\n    \"username\": \"tiar2\",\r\n    \"email\":\"tiar.enigma@gmail.com\",\r\n    \"password\" :\"123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6655/user/register"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 04:15:26 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"reference_id\": \"5613378353608939\"\n}"
+						}
+					]
+				},
+				{
+					"name": "validate otp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reference_id\" : \"8EKcWiSKvPYgYQo6\",\r\n    \"otp\" : \"2650\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:6655/user/validate-otp"
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reference_id\" : \"8odaqfmflWOy5vYG\",\r\n    \"otp\" : \"7170\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:6655/user/validate-otp"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Fri, 01 Nov 2024 04:22:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
 				}
 			]
 		}
