@@ -76,12 +76,14 @@ func (u *UserService) Register(ctx context.Context, req dto.UserRegisterReq) (dt
 		return dto.UserRegisterRes{}, domain.ErrUsernameTaken
 	}
 
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(req.Password), 12)
+
 	user := domain.User{
 		FullName: req.FullName,
 		Email:    req.Email,
 		Phone:    req.Phone,
 		Username: req.Username,
-		Password: req.Password,
+		Password: string(hashedPassword),
 	}
 	err = u.userRepository.Insert(ctx, &user)
 	if err != nil {
